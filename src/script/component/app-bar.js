@@ -1,18 +1,37 @@
 class AppBar extends HTMLElement {
 
+    constructor() {
+        super();
+        this.shadowDOM = this.attachShadow({
+            mode: "open"
+        });
+    }
+
     connectedCallback() {
         this.render();
     }
 
-    // Jika kita ingin element ini ketika diterapkan langsung melakukan rendering maka kita dapat memanggil fungsi this.render() di dalam connectedCallback.
-
-
-    //untuk menampilkan elemen yang dibutuhkan pada melalui properti this.innerHTML. Apa saja yang dibutuhkan? Kita bisa melihatnya pada berkas index.html. => tugas fungsi renmder()
     render() {
-        this.innerHTML = `<h2>Club Finder</h2>`;
-
+        this.shadowDOM.innerHTML = `
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            :host {
+                display: block;
+                width: 100%;
+                background-color: cornflowerblue;
+                color: white;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+            h2 {
+                padding: 16px;
+            }
+        </style>
+        <h2>Club Finder</h2>`;
     }
-
 }
 
-customElements.define("app-bar", AppBar); //untuk mendefinisikan custom element yang kita buat agar dapat digunakan pada DOM.
+customElements.define("app-bar", AppBar);
